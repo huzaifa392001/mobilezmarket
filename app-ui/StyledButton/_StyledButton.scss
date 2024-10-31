@@ -1,0 +1,274 @@
+.styled_button {
+    padding: 10px 20px;
+    background-color: transparent;
+    border: none;
+    border-radius: $radius_xlg;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: $transition_fast;
+
+    .child_element {
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        font-size: $text_sm;
+    }
+
+    .loading_wrap {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        > svg {
+            animation: loading $transition_slow infinite;
+            font-size: 18px;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0);
+            }
+
+            from {
+                transform: rotate(360deg);
+            }
+        }
+    }
+
+    &.with_icon {
+        .child_element {
+            display: flex;
+            align-items: center;
+
+            > svg,
+            img {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    &.with_icon_right {
+        .child_element {
+            display: flex;
+            align-items: center;
+
+            > svg,
+            img {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    &.light {
+        background-color: $body_color;
+
+        span {
+            color: $primary;
+        }
+    }
+
+    &.light_gray {
+        background-color: $light_gray;
+
+        span {
+            color: $dark;
+        }
+    }
+
+
+    &.light_primary {
+        background-color: rgba($color: $primary, $alpha: 0.3);
+
+        span {
+            color: $primary;
+        }
+
+    }
+
+    &.primary {
+        background-color: $primary;
+
+        span {
+            color: $light;
+        }
+    }
+
+    &.secondary {
+        background-color: $secondary;
+
+        span {
+            color: $light;
+        }
+    }
+
+    &.secondary_light {
+        background-color: rgba($color: $secondary, $alpha: 0.3);
+        border: solid 1px $secondary;
+
+        span {
+            color: $secondary;
+        }
+    }
+
+
+    &.danger {
+        background-color: $danger;
+
+        span {
+            color: $light;
+        }
+    }
+
+    &.success {
+        background-color: $success;
+
+        span {
+            color: $light;
+        }
+    }
+
+    &.info {
+        background-color: $info;
+
+        span {
+            color: $light;
+        }
+    }
+
+    &.warning {
+        background-color: $warning;
+
+        span {
+            color: $light;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:active {
+        opacity: 1;
+    }
+
+    &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+
+        .child_element {
+            opacity: 1;
+        }
+    }
+
+    &.loading {
+
+        .child_element {
+            opacity: 0;
+        }
+    }
+
+    // text colors
+
+    &.text_primary {
+        span {
+            color: $primary;
+        }
+    }
+
+    &.text_light {
+        span {
+            color: $light;
+        }
+    }
+
+    &.text_primary {
+        span {
+            color: $secondary;
+        }
+    }
+
+    &.text_danger {
+        span {
+            color: $danger;
+        }
+    }
+
+    &.text_info {
+        span {
+            color: $info;
+        }
+    }
+
+    &.text_success {
+        span {
+            color: $success;
+        }
+    }
+
+    &.text_warning {
+        span {
+            color: $warning;
+        }
+    }
+
+    // sizes
+
+    &.xlg {
+        padding: 14px 40px;
+    }
+
+    &.lg {
+        padding: 10px 30px;
+    }
+
+    &.md {
+        padding: 8px 20px;
+    }
+
+    &.sm {
+        padding: 6px 15px;
+    }
+
+    &.p_0 {
+        padding: 0;
+    }
+
+    &.icon_style {
+        &.md {
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                line-height: 1;
+            }
+
+            svg {
+                font-size: 22px;
+            }
+        }
+
+        &.sm {
+            height: 30px;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                line-height: 1;
+            }
+
+            svg {
+                font-size: 22px;
+            }
+        }
+    }
+}

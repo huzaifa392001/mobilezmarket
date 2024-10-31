@@ -1,0 +1,225 @@
+.blogCard {
+    @apply flex justify-start w-full flex-col;
+
+    figure {
+        @apply relative h-[180px] lg:h-[250px] w-full rounded-xl overflow-clip border-2 border-transparent transition-all;
+
+        img {
+            @apply h-full w-full object-cover transition-all;
+        }
+
+        .imgCont {
+            @apply bg-gray-500 absolute h-full w-full;
+            animation: imgBlink 0.6s linear infinite alternate;
+
+            @keyframes imgBlink {
+                from {
+                    opacity: 0.75;
+                }
+
+                to {
+                    opacity: 0.95;
+                }
+            }
+        }
+    }
+
+    &:not(.main, .small, .box):hover {
+        figure {
+            @apply border-[var(--theme-color)];
+
+            img {
+                transform: scale(1.15)
+            }
+        }
+
+        .content {
+            @apply -translate-y-3;
+        }
+    }
+
+    .content {
+        @apply w-full text-[var(--white)] transition-all;
+
+        h1 {
+            @apply text-[2rem] md:text-[2.75rem] leading-[3.5rem] text-[var(--white)] capitalize font-bold transition-all xl:text-[3.25rem] xl:leading-[4.76500rem];
+        }
+
+        h3 {
+            @apply text-[1.5rem] mt-4 font-bold;
+        }
+
+        .ratingCont {
+            @apply flex flex-col mt-5;
+
+            .rating {
+                @apply h-6 bg-[#D9D9D9] w-full rounded-3xl relative overflow-clip;
+
+                &::before {
+                    content: '';
+                    width: var(--width, 0%);
+                    @apply h-full bg-[var(--theme-color)] absolute;
+                }
+            }
+
+            span {
+                @apply block text-[var(--white)] text-[1.25rem] font-bold mt-1;
+            }
+        }
+
+        p {
+            @apply text-[1.5rem] mt-5;
+        }
+
+        .linkBtn {
+            @apply inline-block text-[var(--theme-color)] text-[1.125rem] font-bold mt-3;
+        }
+    }
+
+    &.main {
+        @apply md:h-[250px] lg:h-[400px] flex-row justify-between block md:flex;
+
+        figure,
+        .content {
+            @apply h-full;
+            width: calc(50% - 9px);
+            flex: 0 1 calc(50% - 9px);
+
+            @media screen and (max-width: 767.98px) {
+                width: 100%;
+                flex: 0 1 100%;
+            }
+        }
+
+        figure {
+            @apply h-[300px] md:h-[250px] lg:h-[400px];
+        }
+
+        &:hover {
+            figure {
+                @apply border-[var(--theme-color)];
+            }
+
+            .content {
+                h1 {
+                    @apply text-[var(--theme-color)];
+                }
+            }
+        }
+    }
+
+    &.small {
+        @apply block md:flex flex-row gap-x-4 items-start md:h-[120px] xl:h-[150px];
+
+        figure {
+            @apply h-[150px] md:h-full md:w-2/5;
+        }
+
+        .content {
+            @apply text-[var(--text-color)] md:w-3/5 h-full flex flex-col justify-between;
+
+            h3 {
+                @apply m-0 text-[1.125rem] font-bold;
+            }
+        }
+
+        &:hover {
+            figure {
+                @apply border-[var(--theme-color)];
+
+                img {
+                    @apply scale-110;
+                }
+            }
+
+            .content {
+
+                @apply -translate-x-2;
+
+                h3 {
+                    @apply text-[var(--secondary-color)];
+                }
+            }
+        }
+    }
+
+    &.box {
+        @apply p-2 flex-col bg-[var(--white)] rounded-xl overflow-clip border-2 border-transparent transition-all;
+        box-shadow: 0px 0px 23.8px 8px #0000001A;
+
+        figure {
+            @apply h-[150px] xl:h-[250px];
+        }
+
+        .content {
+            h3 {
+                @apply text-[var(--text-color)] text-[1rem];
+            }
+        }
+
+        &:hover {
+            @apply border-[var(--theme-color)];
+
+            figure {
+                img {
+                    @apply scale-110;
+                }
+            }
+        }
+    }
+
+    &.mini {
+        @apply flex-row gap-x-2;
+
+        figure {
+            @apply h-[65px];
+
+            img {}
+        }
+
+        .content {
+            h3 {
+                @apply text-[var(--text-color)] text-[12px] font-normal;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+    }
+
+    &.loading {
+        .content {
+            @apply flex gap-2;
+
+            .contentLine {
+                @apply h-[15px] w-full block bg-gray-500;
+                animation: imgBlink 0.6s linear infinite alternate;
+
+                @keyframes imgBlink {
+                    from {
+                        opacity: 0.75;
+                    }
+
+                    to {
+                        opacity: 0.95;
+                    }
+                }
+            }
+        }
+
+        &.box,
+        &.homeBannerCard,
+        &.mini {
+            .content {
+                @apply flex-col mt-3;
+            }
+        }
+
+        &.mini {
+            figure {
+                @apply h-[120px];
+            }
+        }
+    }
+}

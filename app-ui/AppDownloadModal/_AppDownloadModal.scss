@@ -1,0 +1,89 @@
+.appDownloadModal {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 111;
+
+    .modalBg {
+        background-color: rgba($color: $dark, $alpha: 0.4);
+        position: absolute;
+        inset: 0;
+        backdrop-filter: blur(5px);
+    }
+
+    .modalContent {
+        background: $light;
+        padding: 1rem;
+        position: absolute;
+        width: 100%;
+        max-width: 575px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        .closeBtn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: $dark;
+            border-radius: 100%;
+            border: none;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                fill: $secondary;
+            }
+        }
+
+        .modalBody {
+            text-align: center;
+
+            h2 {
+                font-size: $title_md;
+                margin: 0;
+                color: $dark;
+                line-height: 1.2;
+            }
+
+            p {
+                font-size: $text_md;
+                margin: 10px 0;
+                color: $dark;
+            }
+        }
+
+        .btnCont {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: center;
+
+            .downloadBtn {
+                &.google {
+                    .cls-2 {
+                        fill: #fff;
+                        stroke: #fff;
+                        stroke-miterlimit: 10;
+                        stroke-width: .2px
+                    }
+
+                    .cls-9 {
+                        opacity: .12
+                    }
+                }
+
+                &.apple {
+                    .cls-2 {
+                        fill: #fff
+                    }
+                }
+            }
+        }
+    }
+}

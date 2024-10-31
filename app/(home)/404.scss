@@ -1,0 +1,144 @@
+.notFoundSec {
+    height: 100%;
+    padding: 0.2;
+}
+
+.notFoundSec .flex-container {
+    align-items: center;
+    -webkit-animation: colorSlide 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+    animation: colorSlide 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+    color: #fff;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    padding: 11rem 0;
+    width: 100%;
+}
+
+.notFoundSec .flex-container .text-center {
+    text-align: center;
+}
+
+.notFoundSec .flex-container .text-center h1,
+.notFoundSec .flex-container .text-center h3 {
+    cursor: default;
+    margin: 10px;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.notFoundSec .flex-container .text-center h1 .fade-in,
+.notFoundSec .flex-container .text-center h3 .fade-in {
+    -webkit-animation: fadeIn 2s ease infinite;
+    animation: fadeIn 2s ease infinite;
+}
+
+.notFoundSec .flex-container .text-center h1 {
+    border-bottom: 1px dashed #fff;
+    font-size: 8em;
+    transition: font-size 0.2s ease-in-out;
+}
+
+.notFoundSec .flex-container .text-center h1 span{
+    font-size: inherit;
+    color: inherit;
+}
+
+.notFoundSec .flex-container .text-center h1 span#digit1 {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+}
+
+.notFoundSec .flex-container .text-center h1 span#digit2 {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+}
+
+.notFoundSec .flex-container .text-center h1 span#digit3 {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+
+.notFoundSec .flex-container .text-center a {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 20px 0;
+    outline: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease-in;
+}
+
+.notFoundSec .flex-container .text-center a:hover {
+    background-color: #fff;
+    color: #555;
+    cursor: pointer;
+}
+
+@-webkit-keyframes colorSlide {
+    0% {
+        background-color: #152a68;
+    }
+
+    25% {
+        background-color: #4169e1;
+    }
+
+    50% {
+        background-color: #2e8b57;
+    }
+
+    75% {
+        background-color: tomato;
+    }
+
+    to {
+        background-color: #152a68;
+    }
+}
+
+@keyframes colorSlide {
+    0% {
+        background-color: #152a68;
+    }
+
+    25% {
+        background-color: #4169e1;
+    }
+
+    50% {
+        background-color: #2e8b57;
+    }
+
+    75% {
+        background-color: tomato;
+    }
+
+    to {
+        background-color: #152a68;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

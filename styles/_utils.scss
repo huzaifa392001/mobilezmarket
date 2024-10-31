@@ -1,0 +1,127 @@
+.content_wrap {
+    width: 100%;
+    max-width: 1440px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.col_padding_10 {
+    padding: 10px;
+}
+
+.page_title {
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.text_primary {
+    color: $primary;
+}
+
+.text_light {
+    color: $light;
+}
+
+.text_secondary {
+    color: $secondary;
+}
+
+.text_danger {
+    color: $danger;
+}
+
+.text_info {
+    color: $info;
+}
+
+.text_success {
+    color: $success;
+}
+
+.text_warning {
+    color: $warning;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.font_light {
+    font-weight: $font_light;
+}
+
+.font_regular {
+    font-weight: $font_regular;
+}
+
+.font_semibold {
+    font-weight: $font_medium;
+}
+
+.font_medium {
+    font-weight: $font_semibold;
+}
+
+.font_bold {
+    font-weight: $font_bold;
+}
+
+.w_100 {
+    width: 100%;
+}
+
+.w_max_content {
+    min-width: max-content;
+    width: max-content;
+}
+
+.submit_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.page_title {
+    margin-bottom: 30px;
+}
+
+.flex_center {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d_block {
+    display: block;
+}
+
+.m_auto {
+    margin: auto;
+}
+
+
+@media screen and (max-width: $breakpoint_lg) {
+    .content_wrap {
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width: 1440px){
+    .content_wrap {
+        max-width: 1366px;
+    }
+}
+
+@media screen and (max-width: 1366px){
+    .content_wrap {
+        max-width: 1280px;
+    }
+}
+
+@media screen and (max-width: 1280px){
+    .content_wrap {
+        max-width: 1024px;
+    }
+}

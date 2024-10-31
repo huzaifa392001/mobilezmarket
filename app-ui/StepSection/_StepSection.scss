@@ -1,0 +1,107 @@
+.stepCont {
+    .customBtn {
+        margin: 20px auto 0;
+        display: flex;
+        width: fit-content;
+    }
+
+    .stepRow {
+        display: flex;
+        justify-content: space-between;
+
+        .stepItem {
+            flex: 0 1 32%;
+            width: 32%;
+            overflow: hidden;
+
+            .number {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                h4 {
+                    font-size: 6rem;
+                    color: $secondary;
+                    text-shadow: 0 0 15px #0006;
+                    margin: 0 !important;
+                }
+
+                .icon {
+                    background: $primary;
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 100%;
+                    margin-left: -25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    svg {
+                        color: $light;
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+            }
+
+            .content {
+                text-align: center;
+
+                h3 {
+                    font-size: $title_md;
+                    font-weight: 700;
+                    margin: 0 !important;
+                    color: $dark;
+                }
+
+                p {
+                    font-size: $text_lg;
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width: $breakpoint_md) {
+    .stepCont {
+        .stepRow {
+            .stepItem {
+                .content {
+                    h3 {
+                        font-size: 18px;
+                    }
+
+                    p {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $breakpoint_sm) {
+
+    .stepCont .stepRow {
+        flex-direction: column;
+        align-items: center;
+
+        .stepItem {
+            display: flex;
+            flex: 0 1 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+
+            .content {
+                flex: 0 1 65%;
+                text-align: left;
+            }
+
+            .number {
+                flex: 0 1 35%;
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+.blogs_wrapper {
+  min-height: 100 svh;
+}
+
+.blogs_details_wrap {
+  margin: 1.25rem 0;
+
+  img {
+    border-radius: $radius_md;
+    width: 100%;
+
+  }
+
+  .blog_content {
+    h2 {
+      margin-top: 20px;
+    }
+
+    .bold_para {
+      font-weight: $font_bold;
+      color: $dark;
+    }
+
+    p {
+      margin-top: 14px;
+    }
+  }
+
+}
+
+.pagination_btn_wrapper {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+
+}

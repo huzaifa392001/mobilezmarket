@@ -1,0 +1,6 @@
+User-agent: *
+allow: 
+Sitemap: https://www.mobilezmarket.com/sitemap.xml
+Disallow: /cgi-bin/
+Disallow: /theme
+Disallow: /plugins

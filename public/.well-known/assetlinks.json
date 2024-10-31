@@ -1,0 +1,14 @@
+[
+    {
+      "relation": [
+        "delegate_permission/common.handle_all_urls"
+      ],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.wizard.mobilez",
+        "sha256_cert_fingerprints": [
+          "29:8D:36:A9:13:EF:5B:FD:EA:59:D6:6B:98:DD:AE:E1:4E:94:A2:C6:47:DB:77:41:36:13:EB:76:25:43:74:FD"
+        ]
+      }
+    }
+  ]

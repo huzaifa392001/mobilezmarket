@@ -1,0 +1,61 @@
+// colors
+
+$primary: #083b86;
+$secondary: #ff9800;
+$danger: #f00;
+$warning: #f2a818;
+$success: #089171;
+$info: #17a2b8;
+$light: #ffffff;
+$dark: #000000;
+$light_gray: #c1c1c1;
+$gray: #999999;
+$text_color: #000000bd;
+$body_color: #f2f3f3;
+
+// fonts sizes
+
+$title_xlg: 40px;
+$title_lg: 30px;
+$title_md: 26px;
+$title_sm: 22px;
+$title_xsm: 18px;
+
+$text_lg: 18px;
+$text_md: 16px;
+$text_sm: 14px;
+$text_xsm: 12px;
+
+// Border Colors
+$stroke_color: #dadada;
+
+// Font Weights
+$font_light: 300;
+$font_regular: 400;
+$font_medium: 500;
+$font_semibold: 600;
+$font_bold: 700;
+$font_extrabold: 800;
+
+// transitions
+$transition_slow: 0.8s;
+$transition_medium: 0.5s;
+$transition_fast: 0.3s;
+
+// radius
+$radius_xsm: 4px;
+$radius_sm: 6px;
+$radius_md: 10px;
+$radius_lg: 15px;
+$radius_xlg: 100px;
+
+//shadow
+$shadow_light: 0px 4px 15px 0px rgba(0, 0, 0, 0.1);
+
+// Breakpoints
+
+$breakpoint_xs: 320px;
+$breakpoint_sm: 576px;
+$breakpoint_md: 768px;
+$breakpoint_lg: 992px;
+$breakpoint_xl: 1200px;

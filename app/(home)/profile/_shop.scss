@@ -1,0 +1,148 @@
+.profile_layout {
+
+  .product_details_header {
+    .content_wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      >button {
+        display: none;
+      }
+    }
+  }
+
+  .profile_content {
+    display: flex;
+    min-height: 100svh;
+
+    .filters {
+      background-color: $light;
+      min-width: 300px;
+      max-width: 300px;
+      max-height: fit-content;
+      padding: 20px;
+
+      .filters_header {
+        padding: 20px 10px;
+        padding-bottom: 15px;
+        border-bottom: solid 1px $stroke_color;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+          font-size: $text_md;
+          margin: 0;
+        }
+
+        >div {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          button {
+            border-radius: 6px;
+
+            svg {
+              font-size: 18px;
+            }
+          }
+
+          .filters_action {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .shop_ads_result {
+      padding: 20px;
+      flex: 1;
+
+      .product_result_row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
+      }
+
+      @media (max-width: $breakpoint_sm) {
+        .product_result_row {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .shop_profile_mobile {
+        display: none;
+      }
+    }
+
+    .load_more {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+  }
+}
+
+
+@media screen and (max-width: $breakpoint_lg) {
+
+  .profile_layout {
+
+    .product_details_header {
+      .content_wrap {
+        >button {
+          display: block;
+          margin-left: auto;
+        }
+
+      }
+
+    }
+
+    .content_wrap {
+      .shop_ads_result {
+        padding: 10px;
+
+        .shop_profile_mobile {
+          margin-bottom: 20px;
+          display: block;
+        }
+
+      }
+    }
+
+    .profile_content {
+
+      .filters {
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        max-width: 400px;
+        min-width: auto;
+        transform: translateX(-100%);
+        transition: $transition_fast;
+        overflow-y: auto;
+
+        &.open {
+          transform: translateX(0);
+        }
+
+        .shop_profile_wrap {
+          display: none;
+        }
+
+        .filters_action {
+          display: flex !important;
+        }
+
+      }
+    }
+  }
+
+}

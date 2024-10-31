@@ -1,0 +1,113 @@
+.addBannerCont {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+
+    figure {
+        margin: 0;
+        position: relative;
+        height: 400px;
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    .content {
+        position: absolute;
+        inset: 0;
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 4rem 2rem;
+
+        h2 {
+            color: $light;
+            font-size: $title_xlg;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: $text_lg;
+            font-weight: 500;
+            color: $light;
+        }
+
+        .btnCont {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .downloadBtn {
+                &.google {
+                    .cls-2 {
+                        fill: #fff;
+                        stroke: #fff;
+                        stroke-miterlimit: 10;
+                        stroke-width: .2px
+                    }
+
+                    .cls-9 {
+                        opacity: .12
+                    }
+                }
+
+                &.apple {
+                    .cls-2 {
+                        fill: #fff
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $breakpoint_md) {
+    .bannerSec .content_wrap {
+        padding: 0;
+    }
+
+    .addBannerCont {
+        border-radius: 0;
+
+        figure {
+            height: 250px;
+        }
+
+        .content {
+            padding: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: $breakpoint_sm) {
+    .addBannerCont {
+        figure {
+            height: 150px;
+        }
+
+        .content {
+            width: 65%;
+
+            h2 {
+                font-size: 18px;
+                font-weight: 900;
+                text-shadow: 0 0 5px #0007;
+            }
+
+            p {
+                font-size: 11px;
+                text-shadow: 0 0 5px black;
+            }
+
+            .btnCont {
+                svg {
+                    width: 80px;
+                }
+            }
+        }
+    }
+}

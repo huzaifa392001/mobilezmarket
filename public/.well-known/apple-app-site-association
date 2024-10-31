@@ -1,0 +1,18 @@
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "957GK6W9G6.com.wizard.mobilez"],
+             "path":"*"
+           }
+       ]
+   },
+   "webcredentials": {
+      "apps": [ "957GK6W9G6.com.wizard.mobilez" ]
+   },
+
+
+    "appclips": {
+        "apps": ["957GK6W9G6.com.wizard.mobilez"]
+    }
+}

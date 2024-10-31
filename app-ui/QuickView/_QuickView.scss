@@ -1,0 +1,170 @@
+.quickViewModal {
+    position: fixed;
+    min-height: 100vh;
+    height: fit-content;
+    width: 100%;
+    inset: 0;
+    z-index: 111111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modalBg {
+        position: fixed;
+        inset: 0;
+        background-color: #0005;
+        backdrop-filter: blur(5px);
+    }
+
+    .modalContent {
+        background-color: $light;
+        border-radius: 10px;
+        position: relative;
+        width: 80%;
+        overflow: hidden;
+
+        .closeBtn {
+            background-color: rgba($color: $secondary, $alpha: 0.5);
+            position: absolute;
+            top: 0;
+            right: 0;
+            border: none;
+            border-radius: 0 0 0 100%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: $transition_fast;
+
+            svg {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            &:hover {
+                background-color: rgba($color: $secondary, $alpha: 1);
+            }
+        }
+
+        .modalBody {
+            display: flex;
+
+            .imageWrap {
+                flex: 0 1 40%;
+                width: 40%;
+                height: 600px;
+                position: relative;
+                margin: 0;
+                background-color: $body_color;
+
+                .loader {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 60px;
+                    aspect-ratio: 2;
+                    --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+                    background: var(--_g) 0% 50%,
+                    var(--_g) 50% 50%,
+                    var(--_g) 100% 50%;
+                    background-size: calc(100% / 3) 50%;
+                    animation: l3 1s infinite linear;
+                }
+
+                @keyframes l3 {
+                    20% {
+                        background-position: 0% 0%, 50% 50%, 100% 50%
+                    }
+                    40% {
+                        background-position: 0% 100%, 50% 0%, 100% 50%
+                    }
+                    60% {
+                        background-position: 0% 50%, 50% 100%, 100% 0%
+                    }
+                    80% {
+                        background-position: 0% 50%, 50% 50%, 100% 100%
+                    }
+                }
+
+                img {
+                    object-fit: contain;
+                }
+            }
+
+            .contentWrap {
+                flex: 0 1 60%;
+                width: 60%;
+                padding: 2rem 1rem 1rem;
+
+                h2, h3, h4 {
+                    margin: 0 0 10px;
+                    color: #333;
+                }
+
+                h2 {
+                    font-size: $title_lg;
+                    line-height: 1.2;
+                }
+
+                h3 {
+                    font-size: $title_sm;
+                }
+
+                p {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    font-size: $text_xsm;
+                    font-weight: $font_medium;
+                    margin: 0;
+                    color: #333;
+                }
+
+                .spacer {
+                    margin: 30px 0;
+
+                    + .descRow {
+                        border-top: 1px solid $dark;
+                    }
+                }
+
+                .descRow {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-bottom: 1px solid $dark;
+                    padding: 5px 0;
+
+                    > * {
+                        flex: 0 1 50%;
+                        width: 50%;
+                    }
+
+                    p {
+                        font-size: $text_sm;
+                        color: #333;
+                        font-weight: $font_regular;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $breakpoint_md){
+    .quickViewModal {
+        .modalContent{
+            .modalBody{
+                .imageWrap{
+                    display: none;
+                }
+                .contentWrap{
+                    flex: 0 1 100%;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

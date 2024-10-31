@@ -1,0 +1,108 @@
+.newsletterSec {
+    background: rgba($color: $primary, $alpha: 1);
+    padding: 4rem 0;
+
+    .imgCont {
+        height: 300px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            object-fit: contain;
+        }
+    }
+
+    .content {
+        h2 {
+            font-size: 40px;
+            margin: 0 0 5px !important;
+            font-weight: 500;
+            color: $light;
+        }
+
+        p {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin: 0 0 2rem;
+            color: $light;
+        }
+
+        .inputCont {
+            border: 1px solid $gray;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: $light;
+            gap: 1rem;
+            padding: 0.5rem;
+
+            input {
+                width: 100%;
+                height: 40px;
+                border: none;
+                box-shadow: none;
+                outline: none;
+                background: none;
+                font-size: 1rem;
+                font-weight: 400;
+
+                &::placeholder {
+                    color: $dark;
+                }
+            }
+
+            button {
+                width: 40px;
+                height: 40px;
+                border-radius: 100%;
+                background: rgba($color: $secondary, $alpha: 0.5);
+                border: none;
+                cursor: pointer;
+                transition: $transition_fast;
+
+                svg {
+                    color: $dark;
+                    transition: $transition_fast;
+                }
+
+                &:hover {
+                    background: rgba($color: $secondary, $alpha: 1);
+
+                    svg {
+                        color: $light;
+                    }
+                }
+            }
+        }
+    }
+
+    .content_wrap {
+        > * {
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}
+
+@media screen and (max-width: $breakpoint_md) {
+    .newsletterSec {
+        .content {
+            text-align: center;
+
+            h2 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        .imgCont {
+            display: none;
+        }
+    }
+}

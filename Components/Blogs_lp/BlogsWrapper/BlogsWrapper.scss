@@ -1,0 +1,172 @@
+.blogsWrapper {
+    header {
+        @apply flex items-center justify-between px-3 xl:px-12 py-6;
+
+        ul {
+            @apply flex items-center gap-x-4 xl:gap-x-6 ml-auto lg:mr-4;
+
+            &.socialList {
+                @apply gap-x-2 lg:ml-0 mr-4;
+
+                li {
+
+                    a {
+                        @apply bg-[var(--theme-color)] text-[var(--white)] flex items-center justify-center w-8 h-8 rounded-full hover:bg-[var(--secondary-color)] transition-all;
+                    }
+
+                    &:not(.searchBar) {
+                        @apply hidden lg:block;
+                    }
+                }
+            }
+
+            li {
+                a {
+                    @apply text-[var(--secondary-color)] transition-all hover:text-[var(--theme-color)] font-semibold;
+                }
+
+                &.searchBar {
+                    .inputCont {
+                        @apply bg-[#F6F6F6] flex items-center justify-center px-2 border-2 gap-x-2;
+
+                        button {
+                            @apply text-[var(--theme-color)];
+                        }
+
+                        input {
+                            @apply border-0 outline-0 bg-[transparent] text-[0.875rem];
+                        }
+                    }
+                }
+            }
+
+            &.headerLinks {
+                height: calc(100vh - 90px);
+                @apply fixed flex-col bg-white z-10 top-[90px] left-[-250px] w-[250px] shadow-2xl justify-center gap-5 lg:static lg:flex-row lg:bg-none lg:shadow-none lg:w-auto lg:h-auto transition-all;
+                transition-duration: 0.3s;
+
+                &.active {
+                    @apply left-0;
+                }
+            }
+        }
+
+        .menuToggleBtn {
+            @apply bg-[var(--theme-color)] border border-[#0002] w-[25px] h-[25px] flex items-center justify-center text-[var(--white)] rounded-full;
+        }
+    }
+
+    footer {
+        @apply bg-[var(--black)] py-16 text-[var(--white)];
+
+        .footerRow {
+            @apply sm:flex flex-wrap md:grid md:grid-flow-col auto-rows-max gap-8;
+
+            .footerCell {
+
+                @media screen and (max-width: 767.98px) {
+                    width: calc(50% - 14px);
+                    flex: 0 1 calc(50% - 14px);
+
+                    &:first-of-type {
+                        width: 100%;
+                        flex: 0 1 100%;
+                    }
+                }
+
+                @media screen and (max-width: 575.98px) {
+                    width: 100%;
+                }
+
+                p {
+                    @apply text-[0.875rem];
+                }
+
+                .listCont {
+                    *+h3 {
+                        @apply mt-6;
+                    }
+
+                    >h3 {
+                        @apply text-[var(--theme-color)] font-bold text-[1.25rem] mb-3;
+                    }
+
+                    .inputCont {
+                        @apply bg-[var(--white)] relative h-[40px] overflow-clip rounded-lg mt-2;
+
+                        input {
+                            @apply bg-none border-none h-full w-full text-[var(--text-color)] pl-2 pr-8 outline-none;
+                        }
+
+                        button {
+                            @apply absolute top-2/4 -translate-y-2/4 right-0 text-[var(--theme-color)] w-8 h-full flex items-center justify-center z-10;
+                        }
+                    }
+
+                    ul {
+                        &:not(.blogList) {
+                            li {
+                                a {
+                                    @apply text-[1rem] font-normal transition-all hover:text-[var(--theme-color)];
+                                }
+
+                                +li {
+                                    @apply mt-1;
+                                }
+                            }
+                        }
+
+                        &.blogsList {
+                            li {
+                                +li {
+                                    @apply mt-3;
+                                }
+                            }
+                        }
+                    }
+
+                    .btnCont {
+                        @apply flex items-center gap-x-4;
+                    }
+                }
+
+                .logoCont {
+                    @apply flex items-center justify-center flex-col md:block text-center md:text-start;
+
+                    .logo {
+
+                        &+p {
+                            @apply mt-4;
+                        }
+                    }
+
+                    .socialList {
+                        @apply flex items-center gap-x-3 mt-4;
+
+                        li {
+                            a {
+                                @apply bg-[var(--theme-color)] text-[var(--white)] flex items-center justify-center w-8 h-8 rounded-full hover:bg-[var(--secondary-color)] transition-all;
+                            }
+                        }
+                    }
+                }
+
+                &.footerCell {
+                    @apply mt-6;
+                }
+            }
+        }
+
+        .blogCard {
+            .content {
+                h3 {
+                    @apply text-[var(--white)];
+                }
+            }
+        }
+
+        .error-message {
+            @apply text-red-600;
+        }
+    }
+}

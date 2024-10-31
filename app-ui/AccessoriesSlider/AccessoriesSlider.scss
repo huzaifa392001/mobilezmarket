@@ -1,0 +1,25 @@
+.accSlider {
+    .swiper-button-prev, .swiper-rtl .swiper-button-next {
+        display: none;
+        left: auto;
+        right: 40px;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        display: none;
+        top: auto;
+        transform: none;
+        bottom: 0;
+    }
+
+    .swiper-button-prev::after, .swiper-button-next::after {
+        display: none;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: #ff9800;
+    }
+
+    .swiper .swiper-pagination .swiper-pagination-bullet-active {
+        background-color: #ff9800;
+    }
+}

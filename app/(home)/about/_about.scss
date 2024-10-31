@@ -1,0 +1,29 @@
+.about_wrap {
+    figure {
+        height: 500px;
+        border-radius: 30px;
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    .content {
+        padding: 1rem;
+
+        p {
+            margin: 0;
+            font-size: $text_md;
+            line-height: 1.6;
+            font-weight: $font_medium;
+
+            + p {
+                margin-top: 15px;
+            }
+        }
+    }
+
+}
