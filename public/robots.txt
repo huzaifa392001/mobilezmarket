@@ -1,0 +1,14 @@
+User-Agent: *
+Allow: /
+Disallow: /cgi-bin/
+Disallow: /theme
+Disallow: /plugins
+Disallow: /*api
+
+User-Agent: GPTBot
+Allow: /
+Disallow: /cgi-bin/
+Disallow: /theme
+Disallow: /plugins
+
+Sitemap: https://www.mobilezmarket.com/sitemap.xml
