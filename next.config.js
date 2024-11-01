@@ -17,11 +17,7 @@ const nextConfig = {
         source: '/us',
         destination: '/us/blogs',
         permanent: true, // Use false for a temporary redirect (302)
-      }, {
-        source: "/robots.txt",
-        destination: "/robots",
-        permanent: true, // Use false for a temporary redirect (302)
-      },
+      }
     ];
   },
 };
