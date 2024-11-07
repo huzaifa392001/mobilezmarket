@@ -23,8 +23,8 @@ export const metadata = {
         canonical: "https://www.mobilezmarket.com",
     },
     robots: {
-        index: true,
-        follow: true,
+        index: false,
+        follow: false,
     },
     openGraph: {
         title: "Mobilez Market",
