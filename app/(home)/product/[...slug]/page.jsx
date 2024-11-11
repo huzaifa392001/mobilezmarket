@@ -1,10 +1,10 @@
 import ProductDetailsLayout from "@/app-ui/ProductDetailsLayout/ProductDetailsLayout";
 
-const Page = ({params: {slug}}) => {
+const Page = ({ params: { slug } }) => {
     return (
         <>
             <section className="product_details">
-                <ProductDetailsLayout slug={slug}/>
+                <ProductDetailsLayout slug={slug} />
             </section>
         </>
     );
@@ -19,17 +19,14 @@ export async function generateMetadata(props) {
         },
     } = props;
 
-    // Remove everything from "iid" to the end of the title
-    let getTitle = title.slice(0, title.indexOf('iid')).trim();
-
-    // Replace all hyphens with spaces
-    getTitle = getTitle.replace(/-/g, ' ');
-
-    // Capitalize the first letter of the modified title
+    // Modify title
+    let getTitle = title.slice(0, title.indexOf('iid')).trim().replace(/-/g, ' ');
     getTitle = getTitle.slice(0, 1).toUpperCase() + getTitle.slice(1);
 
     const product = await fetch(`https://api.mobilezmarket.com/api/details/${id}/${title}`).then((res) => res.json());
-    let productImage = `https://api.mobilezmarket.com/images/${product?.details?.productimages[0]?.img}`;
+
+    // Product details
+    let productImage = `https://api.mobilezmarket.com/images/${product?.details?.productimages[0].thumbnail_url}`;
     let productTitle = product?.details?.accessories_title ? product?.details?.accessories_title : `${product?.details?.brand} ${product?.details?.model}`;
 
     let og = {
@@ -44,7 +41,29 @@ export async function generateMetadata(props) {
             },
         ],
         site_name: "Mobilez Market",
-    }
+    };
+
+    // Generate JSON-LD schema
+    const schemaData = {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": productTitle,
+        "image": productImage,
+        "description": product?.details?.description,
+        "sku": product?.details?.sku || id,
+        "brand": {
+            "@type": "Brand",
+            "name": product?.details?.brand
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": `https://www.mobilezmarket.com/${product?.id}/${product?.slug}`,
+            "priceCurrency": "PKR",
+            "price": product?.details?.price,
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+        }
+    };
 
     return {
         title: `${getTitle} | Mobilez Market`,
@@ -55,5 +74,15 @@ export async function generateMetadata(props) {
         alternates: {
             canonical: `https://www.mobilezmarket.com/${product?.id}/${product?.slug}`,
         },
+        additionalMetaTags: [
+            {
+                tagName: 'script',
+                innerHTML: JSON.stringify(schemaData),
+                attributes: {
+                    type: 'application/ld+json',
+                    id:"schema"
+                }
+            }
+        ]
     };
 }
