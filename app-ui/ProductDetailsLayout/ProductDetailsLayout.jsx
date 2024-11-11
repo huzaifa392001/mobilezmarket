@@ -8,32 +8,34 @@ import Skeleton from "../Skeleton/Skeleton";
 import StyledButton from "../StyledButton/StyledButton";
 import StyledHeading from "../StyledHeading/StyledHeading";
 import api from "@/services/api";
-import {getFormattedDate, getImage, numberWithCommas} from "@/utils/helper";
-import {useAuthCheck, useFcmToken} from "@/utils/hooks";
-import {Col, Row, notification} from "antd";
-import {useEffect, useState} from "react";
-import {FaFacebook} from "react-icons/fa";
-import {FaLink} from "react-icons/fa6";
-import {IoLogoWhatsapp} from "react-icons/io";
-import {Pagination} from "swiper/modules";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {FaWhatsapp} from "react-icons/fa6";
-import {FaFacebookF} from "react-icons/fa";
-import {FiLink} from "react-icons/fi";
-import {FiEye} from "react-icons/fi";
+import { getFormattedDate, getImage, numberWithCommas } from "@/utils/helper";
+import { useAuthCheck, useFcmToken } from "@/utils/hooks";
+import { Col, Row, notification } from "antd";
+import { useEffect, useState } from "react";
+import { FaFacebook } from "react-icons/fa";
+import { FaLink } from "react-icons/fa6";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FaWhatsapp } from "react-icons/fa6";
+import { FaFacebookF } from "react-icons/fa";
+import { FiLink } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
 import Link from "next/link";
-import {IoHome} from "react-icons/io5";
-import {useRouter} from "next/navigation";
+import { IoHome } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 import ProductCardSkeleton from "../ProductCardSkeleton/ProductCardSkeleton";
+import Head from "next/head";
+import Script from "next/script";
 
 const ProductDetailsLayout = (props) => {
-    const {slug} = props;
+    const { slug } = props;
 
-    const {authCheck} = useAuthCheck();
+    const { authCheck } = useAuthCheck();
 
     const router = useRouter();
 
-    const {fcmToken, notificationPermissionStatus} = useFcmToken();
+    const { fcmToken, notificationPermissionStatus } = useFcmToken();
     const [productDetails, setProductDetails] = useState(null);
     const [views, setViews] = useState(0);
     const [relatedAdds, setRelatedAdds] = useState([]);
@@ -41,8 +43,7 @@ const ProductDetailsLayout = (props) => {
     const [loading, setLoading] = useState(true);
     const [openContactSellerModal, setOpenContactSellerModal] = useState(false);
     const [currentPath, setCurrentPath] = useState("");
-
-    console.log("productDetails=> ", productDetails);
+    const [schemaData, setSchemaData] = useState(null);
 
     useEffect(() => {
         if (window !== undefined) {
@@ -67,14 +68,18 @@ const ProductDetailsLayout = (props) => {
         try {
             let res = await api.get(`/details/${slug[0]}/${slug[1]}`, {
                 params: body,
+            }).then((res) => {
+                if (res?.data?.status) {
+                    setProductDetails(res?.data?.details);
+                    setViews(res?.data?.views);
+                    setRelatedAdds(res?.data?.related_ads);
+                    setShopAdds(res?.data?.more_ads);
+                    setLoading(false);
+                } else {
+                    console.error("Product Not Found");
+                }
             });
-            if (res?.data?.status) {
-                setProductDetails(res?.data?.details);
-                setViews(res?.data?.views);
-                setRelatedAdds(res?.data?.related_ads);
-                setShopAdds(res?.data?.more_ads);
-                setLoading(false);
-            }
+
         } catch (error) {
             setLoading(false);
             console.log(error);
@@ -91,7 +96,6 @@ const ProductDetailsLayout = (props) => {
         originalAlt: `${productDetails?.model}`,
         thumbnailAlt: `${productDetails?.model}`,
     }));
-
 
     let sliderProp = {
         breakpoints: {
@@ -139,7 +143,7 @@ const ProductDetailsLayout = (props) => {
 
     const copyLinkToClipboard = () => {
         navigator.clipboard.writeText(currentPath);
-        notification.success({message: "Link copied to clipboard!"});
+        notification.success({ message: "Link copied to clipboard!" });
     };
 
     const onPushToProfile = () => {
@@ -148,8 +152,39 @@ const ProductDetailsLayout = (props) => {
         );
     };
 
+    useEffect(() => {
+        console.log('productDetails=> ', productDetails);
+        setSchemaData({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": productDetails?.accessories_title ? productDetails?.accessories_title : `${productDetails?.brand} ${productDetails?.model.replace(new RegExp(`^${productDetails?.brand}\\s*`, 'i'), '')}`,
+            "image": `${productDetails?.productimages[0]?.thumbnail_url}`,
+            "description": productDetails?.description,
+            "sku": productDetails?.sku || productDetails?.id,
+            "brand": {
+                "@type": "Brand",
+                "name": productDetails?.brand
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": `https://www.mobilezmarket.com/${productDetails?.id}/${productDetails?.slug}`,
+                "priceCurrency": "PKR",
+                "price": productDetails?.price,
+                "availability": "https://schema.org/InStock",
+                "itemCondition": "https://schema.org/NewCondition",
+            }
+        });
+        console.log('schemaData=> ', schemaData);
+    }, [productDetails]);
+
     return (
         <>
+            {schemaData && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+                />
+            )}
             <div className="product_details_header">
                 <div className="content_wrap">
                     {loading ? (
@@ -157,7 +192,7 @@ const ProductDetailsLayout = (props) => {
                     ) : (
                         <div className="styled_breadcrumb">
                             <Link href="/">
-                                <IoHome/>
+                                <IoHome />
                                 Home
                             </Link>{" "}
                             <span className="separator">/</span>
@@ -198,15 +233,15 @@ const ProductDetailsLayout = (props) => {
                 <Row gutter={[20, 20]}>
                     <Col lg={12} md={12} sm={24} xs={24}>
                         {loading ? (
-                            <div className="image_gallery_loader"/>
+                            <div className="image_gallery_loader" />
                         ) : (
-                            <ImagesGallery images={productImages || []}/>
+                            <ImagesGallery images={productImages || []} />
                         )}
                     </Col>
 
                     <Col lg={12} md={12} sm={24} xs={24}>
                         {loading ? (
-                            <div className="loading_skeleton"/>
+                            <div className="loading_skeleton" />
                         ) : (
                             <h1>
                                 {productDetails?.accessories_title ? (
@@ -222,7 +257,7 @@ const ProductDetailsLayout = (props) => {
 
                         <h2>
                             {loading ? (
-                                <Skeleton isActive={false} height="40px" width="150px"/>
+                                <Skeleton isActive={false} height="40px" width="150px" />
                             ) : (
                                 `Rs: ${numberWithCommas(productDetails?.price)}`
                             )}
@@ -329,11 +364,11 @@ const ProductDetailsLayout = (props) => {
                                 <div className="t_row">
                                     <div className="t_cols">Posted By</div>
                                     <div className="t_cols">
-                    <span onClick={onPushToProfile} className="blink">
-                      {productDetails?.user?.user_type === "business"
-                          ? productDetails?.user?.shop_name
-                          : productDetails?.user?.name}
-                    </span>
+                                        <span onClick={onPushToProfile} className="blink">
+                                            {productDetails?.user?.user_type === "business"
+                                                ? productDetails?.user?.shop_name
+                                                : productDetails?.user?.name}
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="t_row">
@@ -353,11 +388,11 @@ const ProductDetailsLayout = (props) => {
                         <p>{productDetails?.description}</p>
 
                         {loading ? (
-                            <Skeleton height="30px" width="120px"/>
+                            <Skeleton height="30px" width="120px" />
                         ) : (
                             <>
                                 <p className="styled_chip">
-                                    <FiEye/> Views {views}
+                                    <FiEye /> Views {views}
                                 </p>
                             </>
                         )}
@@ -375,13 +410,13 @@ const ProductDetailsLayout = (props) => {
                         </div>
                         <div className="social">
                             <button onClick={openWhatsApp} className="whatsapp">
-                                <FaWhatsapp/>
+                                <FaWhatsapp />
                             </button>
                             <button onClick={openFacebookShare} className="facebook">
-                                <FaFacebookF/>
+                                <FaFacebookF />
                             </button>
                             <button onClick={copyLinkToClipboard} className="secondary">
-                                <FiLink/>
+                                <FiLink />
                             </button>
                         </div>
                     </Col>
@@ -399,13 +434,13 @@ const ProductDetailsLayout = (props) => {
                     </div>
                     <div className="mb_60">
                         {loading ? (
-                            <ProductCardSkeleton/>
+                            <ProductCardSkeleton />
                         ) : (
                             <>
                                 <Swiper {...sliderProp} modules={[Pagination]} loop={true}>
                                     {relatedAdds?.map((item) => (
                                         <SwiperSlide key={item?.id}>
-                                            <ProductCard className="card_small_mobile" data={item}/>
+                                            <ProductCard className="card_small_mobile" data={item} />
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
@@ -415,17 +450,17 @@ const ProductDetailsLayout = (props) => {
                 </div>
                 <div>
                     <div className="mb_60">
-                        <StyledHeading text="RELATED ITEMS"/>
+                        <StyledHeading text="RELATED ITEMS" />
                     </div>
                     <div className="mb_60">
                         {loading ? (
-                            <ProductCardSkeleton/>
+                            <ProductCardSkeleton />
                         ) : (
                             <>
                                 <Swiper {...sliderProp} modules={[Pagination]} loop={true}>
                                     {shopAdds?.map((item) => (
                                         <SwiperSlide key={item?.id}>
-                                            <ProductCard className="card_small_mobile" data={item}/>
+                                            <ProductCard className="card_small_mobile" data={item} />
                                         </SwiperSlide>
                                     ))}
                                 </Swiper>
