@@ -4,6 +4,7 @@ Disallow: /cgi-bin/
 Disallow: /theme
 Disallow: /plugins
 Disallow: /*api
+Disallow: /?/
 
 User-Agent: GPTBot
 Allow: /
