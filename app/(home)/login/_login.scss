@@ -34,10 +34,10 @@
   }
 }
 
-@media screen and (max-width:$breakpoint_md) {
+@media screen and (max-width: $breakpoint_md) {
   .login_wrap {
     .login_form {
-      padding:0;
+      padding: 0;
     }
     .hide_image_tab {
       display: none;

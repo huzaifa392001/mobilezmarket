@@ -1,9 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import BlogCard from '../BlogCard/BlogCard'
 import Link from 'next/link'
 
 function BlogsSection(props) {
+    useEffect(() => {
+        console.log("blog Section props=> ", props?.blogs)
+    }, [])
     return (
         <section className={`blogsSec ${props?.className || ''}`}>
             <div className="containerCont">
@@ -24,7 +27,8 @@ function BlogsSection(props) {
                                 slug={blog?.slug}
                                 key={blog?.id || index} // Use a unique key, such as blog id or fallback to index
                                 heading={blog?.title}
-                                img={blog?.thumbnail_image}
+                                img={blog?.thumbnail_url}
+                                id={blog?.id}
                                 readMore
                                 className={props?.cardClass}
                             />

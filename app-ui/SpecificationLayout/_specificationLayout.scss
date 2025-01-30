@@ -1,0 +1,330 @@
+.specSec {
+    padding: 5rem 0;
+    @media screen and (max-width: $breakpoint_lg) {
+        padding: 4rem 1rem;
+    }
+
+    .ant-col {
+        width: 100%;
+    }
+
+    .productsWrap {
+        width: calc(100% - 1rem);
+        margin: 0 auto;
+        @apply grid grid-cols-2 gap-5;
+
+        .smallProductCard {
+            border: solid 1px #dadada;
+            max-width: 100%;
+            overflow: hidden;
+            background-color: #ffffff;
+            border-radius: 10px;
+            position: relative;
+            width: 100%;
+            transition: 0.3s;
+
+            figure {
+                width: 100%;
+                height: 100px;
+                background: #dadada;
+                margin: 0;
+            }
+
+            .content {
+                padding: 0.5rem;
+                h3 {
+                    margin: 0;
+                    font-size: $text_lg;
+                    font-weight: $font_bold;
+                    color: $primary;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+
+                .price {
+                    font-size: $text_sm;
+                    font-weight: $font_bold;
+                }
+            }
+        }
+    }
+
+    .mobileSection {
+        .mainInfo {
+            background: linear-gradient(to right, #f8f8f8, #a5a5c9);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px #0004;
+
+            h1 {
+                padding: 0 1.25rem;
+                font-size: $title_xlg;
+                text-transform: capitalize;
+                color: $primary;
+                font-weight: 700;
+
+                @media screen and (max-width: $breakpoint_md) {
+                    font-size: $title_md;
+                }
+            }
+            .mainInfoRow {
+                background: linear-gradient(to right, #fff5, transparent);
+                padding: 1.25rem;
+                align-items: flex-end;
+
+                @media screen and (max-width: $breakpoint_sm) {
+                    padding: 1.25rem 0.5rem;
+                }
+
+                .mobileImg {
+                    margin: 0;
+                    max-height: 500px;
+                    overflow: hidden;
+
+                    @media screen and (max-width: $breakpoint_xxl) {
+                        max-height: 350px;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 500px;
+                        object-fit: contain;
+                        object-position: left bottom;
+
+                        @media screen and (max-width: $breakpoint_xxl) {
+                            max-height: 350px;
+                        }
+                    }
+
+                    @media screen and (max-width: $breakpoint_md) {
+                        img {
+                            object-position: center center;
+                        }
+                    }
+                }
+
+                ul {
+                    list-style: none;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    padding: 0 1rem;
+
+                    li {
+                        font-size: $text_md;
+                        font-weight: $font_medium;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        color: $text_color;
+
+                        * {
+                            margin: 0;
+                        }
+
+                        svg {
+                            width: 40px;
+                        }
+
+                        span {
+                            width: calc(100% - 40px);
+                            flex: 0 1 calc(100% - 40px);
+                        }
+                    }
+                }
+
+                .mainSpecs {
+                    ul {
+                        gap: 2rem 0;
+
+                        @media screen and (max-width: $breakpoint_xxl) {
+                            gap: 1rem;
+                        }
+                        li {
+                            svg {
+                                width: 80px;
+
+                                @media screen and (max-width: $breakpoint_xxl) {
+                                    width: 40px;
+                                    height: 40px;
+                                }
+                            }
+
+                            span {
+                                width: calc(100% - 100px);
+                                flex: 0 1 calc(100% - 100px);
+
+                                @media screen and (max-width: $breakpoint_xxl) {
+                                    width: calc(100% - 60px);
+                                    flex: 0 1 calc(100% - 60px);
+                                }
+                            }
+                            h4 {
+                                font-size: $title_md;
+                                color: #000;
+
+                                @media screen and (max-width: $breakpoint_xxl) {
+                                    font-size: $title_sm;
+                                }
+                            }
+                            h6 {
+                                font-size: $text_sm;
+                                color: #000;
+
+                                @media screen and (max-width: $breakpoint_xxl) {
+                                    font-size: $text_xsm;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .shareBtn {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: none;
+                border: none;
+                width: 70px;
+                height: 70px;
+                cursor: pointer;
+            }
+        }
+
+        .generalInfo {
+            margin-top: 3rem;
+
+            .infoRow {
+                display: flex;
+                justify-content: space-between;
+
+                @media screen and (max-width: $breakpoint_sm) {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+
+                .headingCol {
+                    flex: 0 1 24%;
+                    width: 24%;
+                    background-color: #f6f6f6;
+                    padding: 1rem;
+
+                    @media screen and (max-width: $breakpoint_sm) {
+                        flex: 0 1 100%;
+                        width: 100%;
+                    }
+
+                    h4 {
+                        margin: 0;
+                        font-size: $title_md;
+                        color: $primary;
+                        text-transform: uppercase;
+                        font-weight: $font_bold;
+
+                        @media screen and (max-width: $breakpoint_md) {
+                            font-size: $title_xsm;
+                        }
+                    }
+                }
+                .descriptionCol {
+                    flex: 0 1 74%;
+                    width: 74%;
+                    background-color: #f6f6f6;
+                    padding: 0.5rem 1rem;
+
+                    @media screen and (max-width: $breakpoint_sm) {
+                        flex: 0 1 100%;
+                        width: 100%;
+                    }
+
+                    ul {
+                        padding: 0;
+                        margin: 0;
+                        list-style: none;
+
+                        li {
+                            display: flex;
+                            padding: 0.5rem 2rem;
+                            font-size: $text_md;
+                            font-weight: $font_regular;
+                            justify-content: space-between;
+
+                            @media screen and (max-width: $breakpoint_md) {
+                                padding: 0.5rem 0;
+                            }
+
+                            span {
+                                flex: 0 1 74%;
+                                width: 74%;
+                                color: $primary;
+
+                                &:first-child {
+                                    flex: 0 1 24%;
+                                    width: 24%;
+                                }
+                            }
+
+                            & + li {
+                                border-top: 1px solid #d3d3d3;
+                            }
+                        }
+                    }
+                }
+
+                & + .infoRow {
+                    margin-top: 1.5rem;
+                }
+            }
+
+            .description {
+                font-size: $title_md;
+                color: $primary;
+                margin-top: 1rem;
+
+                span {
+                    font-size: $title_md;
+                    font-weight: $font_bold;
+                    color: $primary;
+                }
+
+                @media screen and (max-width: $breakpoint_lg) {
+                    font-size: $title_sm;
+                    text-align: center;
+                    span {
+                        font-size: $title_sm;
+                    }
+                }
+            }
+        }
+    }
+
+    .longAdd {
+        background-color: #e2e2e2;
+        width: calc(100% - 2rem);
+        height: 50%;
+        margin: 0 auto;
+        border-radius: 10px;
+        position: relative;
+
+        &::before {
+            content: "Advertisement";
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: $title_lg;
+            font-weight: $font_medium;
+            color: #999999;
+
+            @media screen and (max-width: $breakpoint_xxl) {
+                font-size: $title_sm;
+            }
+        }
+
+        @media screen and (max-width: $breakpoint_lg) {
+            display: none;
+        }
+    }
+}

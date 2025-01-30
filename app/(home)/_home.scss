@@ -141,6 +141,7 @@
 
         li {
             color: $light;
+
             span {
                 font-weight: bold;
                 margin-right: 5px;
@@ -148,7 +149,8 @@
             }
         }
     }
-    button{
+
+    button {
         background-color: $secondary;
         border-radius: 100%;
         width: 25px;

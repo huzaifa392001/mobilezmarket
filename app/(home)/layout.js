@@ -23,8 +23,8 @@ export const metadata = {
         canonical: "https://www.mobilezmarket.com",
     },
     robots: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
     },
     openGraph: {
         title: "Mobilez Market",
@@ -40,7 +40,7 @@ export const metadata = {
         site_name: "Mobilez Market",
     },
     other: {
-        'google-site-verification': 't361brMhfxBvqE7YjFtYzJM5Rdq_UxzYcMPddyoYcR8',
+        // 'google-site-verification': 't361brMhfxBvqE7YjFtYzJM5Rdq_UxzYcMPddyoYcR8',
         'p:domain_verify': "1ae8699e41eff8f0bb14e651de58307e"
     }
 };

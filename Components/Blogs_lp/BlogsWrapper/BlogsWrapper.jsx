@@ -14,6 +14,9 @@ import './BlogsWrapper.scss';
 import { Field, Form, Formik } from 'formik';
 import { FaBars, FaFacebookF, FaInstagram, FaSearch, FaTwitter } from 'react-icons/fa';
 import BlogsFooter from '../BlogsFooter/BlogsFooter';
+import { Provider } from 'react-redux';
+import { persistor, store } from '@/Redux/Store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function BlogsWrapper({ children }) {
 	const testimonials = [
@@ -94,95 +97,100 @@ function BlogsWrapper({ children }) {
 	}, []);
 
 	return (
-		<div className='blogsWrapper'>
-			<header>
-				<Link href='/us/blogs' className="logoCont">
-					<Image src={'/blogs/images/logo.png'} alt='Website Logo' width={125} height={52} />
-				</Link>
+		<Provider store={store}>
+			<PersistGate loading={null} persistor={persistor}>
+				<div className='blogsWrapper'>
+					<header>
+						<Link href='/us/blogs' className="logoCont">
+							<Image src={'/blogs/images/logo.png'} alt='Website Logo' width={125} height={52} />
+						</Link>
 
-				<ul className={`headerLinks ${headerStatus ? "active" : ""}`}>
-					<li><Link onClick={handleHeader} href={'/us/category/phone-reviews'}>Phone Reviews</Link></li>
-					<li><Link onClick={handleHeader} href={'/us/category/upcoming-phones'}>Upcoming Phone</Link></li>
-					<li><Link onClick={handleHeader} href={'/us/category/top-10'}>Top 10 List</Link></li>
-					<li><Link onClick={handleHeader} href={'/us/category/top-5'}>Top 5 List</Link></li>
-					<li><Link onClick={handleHeader} href={'/us/category/phone-news'}>Phone News</Link></li>
-					<li><Link onClick={handleHeader} href={'/us/category/news'}>News</Link></li>
-					<li><Link onClick={handleHeader} href={'/us/category/brands'}>Brands Name</Link></li>
-				</ul>
+						<ul className={`headerLinks ${headerStatus ? "active" : ""}`}>
+							<li><Link onClick={handleHeader} href={'/us/category/phone-reviews'}>Phone Reviews</Link></li>
+							<li><Link onClick={handleHeader} href={'/us/category/upcoming-phones'}>Upcoming Phone</Link></li>
+							<li><Link onClick={handleHeader} href={'/us/category/top-10'}>Top 10 List</Link></li>
+							<li><Link onClick={handleHeader} href={'/us/category/top-5'}>Top 5 List</Link></li>
+							<li><Link onClick={handleHeader} href={'/us/category/phone-news'}>Phone News</Link></li>
+							<li><Link onClick={handleHeader} href={'/us/category/news'}>News</Link></li>
+							<li><Link onClick={handleHeader} href={'/us/category/brands'}>Brands Name</Link></li>
+						</ul>
 
-				<ul className="socialList">
-					<li className="searchBar">
-						<Formik
-							initialValues={{ query: '' }}
-							onSubmit={(values, { resetForm }) => {
-								handleSearch(values);
-								resetForm();
-							}}
-						>
-							{formikProps => (
-								<Form>
-									<div className='inputCont'>
-										<button type="submit" disabled={!formikProps.values.query.trim()}>
-											<FaSearch />
-										</button>
-										<Field
-											name="query"
-											placeholder="Search..."
-											onChange={formikProps.handleChange}
-											value={formikProps.values.query}
-										/>
-									</div>
-								</Form>
-							)}
-						</Formik>
-					</li>
-					<li><Link href={''}><FaFacebookF /></Link></li>
-					<li><Link href={''}><FaInstagram /></Link></li>
-					<li><Link href={''}><FaTwitter /></Link></li>
-				</ul>
-				<div onClick={handleHeader} className="menuToggleBtn">
-					<FaBars />
+						<ul className="socialList">
+							<li className="searchBar">
+								<Formik
+									initialValues={{ query: '' }}
+									onSubmit={(values, { resetForm }) => {
+										handleSearch(values);
+										resetForm();
+									}}
+								>
+									{formikProps => (
+										<Form>
+											<div className='inputCont'>
+												<button type="submit" disabled={!formikProps.values.query.trim()}>
+													<FaSearch />
+												</button>
+												<Field
+													name="query"
+													placeholder="Search..."
+													onChange={formikProps.handleChange}
+													value={formikProps.values.query}
+												/>
+											</div>
+										</Form>
+									)}
+								</Formik>
+							</li>
+							<li><Link href={''}><FaFacebookF /></Link></li>
+							<li><Link href={''}><FaInstagram /></Link></li>
+							<li><Link href={''}><FaTwitter /></Link></li>
+						</ul>
+						<div onClick={handleHeader} className="menuToggleBtn">
+							<FaBars />
+						</div>
+					</header>
+
+					<ToastContainer />
+					{children}
+					<section className="testimonialSec">
+						<div className="containerCont">
+							<h2 className="secHeading">Testimonials</h2>
+							<div className="sliderCont">
+								<Swiper
+									pagination={{ clickable: true }}
+									modules={[Pagination]}
+									spaceBetween={20}
+									slidesPerView={1}
+									loop={true}
+									breakpoints={{
+										575: { slidesPerView: 2, spaceBetween: 20 },
+										768: { slidesPerView: 3, spaceBetween: 30 },
+										991: { slidesPerView: 4 },
+									}}
+								>
+									{testimonials.map((testimonial, index) => (
+										<SwiperSlide key={index}>
+											<div className="testiCard">
+												<div className="user">
+													<Image src='/blogs/images/quotes.png' alt='Quotes Image' width={100} height={77} className='quotes' />
+													<figure>
+														<img src={testimonial.image} alt={testimonial.name} />
+													</figure>
+													<h3>{testimonial.name}</h3>
+												</div>
+												<p>{testimonial.quote}</p>
+											</div>
+										</SwiperSlide>
+									))}
+								</Swiper>
+							</div>
+						</div>
+					</section>
+					<BlogsFooter />
 				</div>
-			</header>
+			</PersistGate>
+		</Provider>
 
-			<ToastContainer />
-			{children}
-			<section className="testimonialSec">
-				<div className="containerCont">
-					<h2 className="secHeading">Testimonials</h2>
-					<div className="sliderCont">
-						<Swiper
-							pagination={{ clickable: true }}
-							modules={[Pagination]}
-							spaceBetween={20}
-							slidesPerView={1}
-							loop={true}
-							breakpoints={{
-								575: { slidesPerView: 2, spaceBetween: 20 },
-								768: { slidesPerView: 3, spaceBetween: 30 },
-								991: { slidesPerView: 4 },
-							}}
-						>
-							{testimonials.map((testimonial, index) => (
-								<SwiperSlide key={index}>
-									<div className="testiCard">
-										<div className="user">
-											<Image src='/blogs/images/quotes.png' alt='Quotes Image' width={100} height={77} className='quotes' />
-											<figure>
-												<img src={testimonial.image} alt={testimonial.name} />
-											</figure>
-											<h3>{testimonial.name}</h3>
-										</div>
-										<p>{testimonial.quote}</p>
-									</div>
-								</SwiperSlide>
-							))}
-						</Swiper>
-					</div>
-				</div>
-			</section>
-			<BlogsFooter />
-		</div>
 	);
 }
 

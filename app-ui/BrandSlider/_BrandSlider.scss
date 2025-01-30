@@ -30,6 +30,22 @@
                     padding: 2rem;
                 }
             }
+
+            @media screen and (max-width: $breakpoint_md) {
+                figure {
+                    width: 60px;
+                    height: 60px;
+                    box-shadow: 2px 2px 5px #0005;
+                    img {
+                        padding: 15px;
+                    }
+                }
+                h4 {
+                    font-size: $text_sm;
+                    font-weight: 500;
+                    margin: 5px 0;
+                }
+            }
         }
     }
 }

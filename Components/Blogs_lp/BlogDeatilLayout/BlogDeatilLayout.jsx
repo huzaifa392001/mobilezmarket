@@ -15,24 +15,12 @@ function BlogDeatilLayout(props) {
     const [blog, setBlog] = useState();
     const { slug } = props;
     const router = useRouter(); // Initialize useRouter for navigation
-
-    const getBlogs = async () => {
-        try {
-            let res = await api.get("/blogs").then((res) => {
-                setBlogs(res?.data?.blogs?.data);
-            });
-        }
-        catch (error) {
-            console.error('Error');
-
-        }
-    };
-
     const getCurrentBlog = async () => {
         try {
-            let res = await api.get(`/blogs-description/${slug}`).then((res) => {
-                const blogData = res?.data?.details;
+            let res = await api.get(`/us-blogs-detail/${slug}`).then((res) => {
+                const blogData = res?.data;
                 console.log(res?.data?.status)
+                console.log("Data=> ", res?.data)
                 if (res?.data?.status === false) {
                     router.push('/404'); // Redirect to 404 if blog not found
                 } else {
@@ -46,7 +34,6 @@ function BlogDeatilLayout(props) {
     };
 
     useEffect(() => {
-        getBlogs();
         getCurrentBlog();
     }, []);
 
@@ -100,7 +87,7 @@ function BlogDeatilLayout(props) {
                     <div className="blogCont">
                         <div className="blog">
                             <figure className="mainImg">
-                                <Image src={getImage(blog?.thumbnail_image) || '/blogs/images/mainBlog.jpg'} alt={'Image of ' + blog?.title || ''} fill />
+                                <Image src={blog?.thumbnail_url} alt={'Image of ' + blog?.title || ''} fill />
                             </figure>
                             <span>
                                 Published: {formatDate(blog?.updated_at)}
@@ -148,7 +135,7 @@ function BlogDeatilLayout(props) {
                     </div>
                 </div>
             </section>
-            <BlogsSection
+            {/* <BlogsSection
                 loading={[1, 2, 3, 4]}
                 blogs={blogs?.slice(0, 8)}
                 mainHeading={"Popular Stories"}
@@ -159,7 +146,7 @@ function BlogDeatilLayout(props) {
                 blogs={blogs?.slice(0, 8)}
                 mainHeading={"Latest News"}
                 cardClass='small'
-            />
+            /> */}
         </>
     );
 }

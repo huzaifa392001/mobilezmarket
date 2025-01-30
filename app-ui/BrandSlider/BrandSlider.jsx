@@ -47,10 +47,12 @@ const BrandSlider = () => {
                         slidesPerView={2}
                         breakpoints={{
                             380: {
-                                slidesPerView: 3,
+                                slidesPerView: 4.5,
+                                spaceBetween: 20
                             },
                             575: {
-                                slidesPerView: 5,
+                                slidesPerView: 5.5,
+                                spaceBetween: 20
                             },
                             991: {
                                 slidesPerView: 6,

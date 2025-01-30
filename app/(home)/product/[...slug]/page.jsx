@@ -1,4 +1,6 @@
+import { notFound } from 'next/navigation';
 import ProductDetailsLayout from "@/app-ui/ProductDetailsLayout/ProductDetailsLayout";
+import axios from 'axios';
 
 const Page = ({ params: { slug } }) => {
     return (
@@ -20,18 +22,36 @@ export async function generateMetadata(props) {
     } = props;
 
     // Modify title
-    let getTitle = title.slice(0, title.indexOf('iid')).trim().replace(/-/g, ' ');
-    getTitle = getTitle.slice(0, 1).toUpperCase() + getTitle.slice(1);
+    let getTitle = '';
 
-    const product = await fetch(`https://api.mobilezmarket.com/api/details/${id}/${title}`).then((res) => res.json());
+
+    console.log('title=> ', getTitle)
+    let product;
+    try {
+        const response = await fetch(`https://api.mobilezmarket.com/api/details/${id}/${title}`);
+
+        if (!response.ok) {
+            // Trigger a 404 page if product data is not found
+            return notFound();
+        }
+
+        // If response is OK, parse JSON data
+        product = await response.json();
+        product = product.details;
+        getTitle = `${product?.product_type.toLowerCase() === 'used' ? product?.product_type + " " : ""} ${product?.accessories_title ? product?.accessories_title : ""} ${product?.brand ? product?.brand : ""} ${product?.model ? product?.model : ""} in ${product?.user?.city ? product?.user?.city : ''}`;
+        console.log("getTitle from inside try=> ", product)
+    } catch (error) {
+        console.error("Error fetching product data:", error);
+        return notFound(); // Redirect to 404 on fetch error
+    }
 
     // Product details
-    let productImage = `https://api.mobilezmarket.com/images/${product?.details?.productimages[0].thumbnail_url}`;
-    let productTitle = product?.details?.accessories_title ? product?.details?.accessories_title : `${product?.details?.brand} ${product?.details?.model}`;
+    let productImage = `https://api.mobilezmarket.com/images/${product?.productimages[0].thumbnail_url}`;
+    let productTitle = product?.accessories_title ? product?.accessories_title : `${product?.brand} ${product?.model}`;
 
     let og = {
         title: productTitle,
-        description: product?.details?.description,
+        description: product?.description,
         images: [
             {
                 url: productImage,
@@ -45,7 +65,7 @@ export async function generateMetadata(props) {
 
     return {
         title: `${getTitle} | Mobilez Market`,
-        description: product?.details?.description,
+        description: product?.description,
         openGraph: {
             ...og
         },

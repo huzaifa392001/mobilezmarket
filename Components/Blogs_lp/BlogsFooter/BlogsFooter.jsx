@@ -146,7 +146,7 @@ function BlogsFooter() {
                             </ul>
                         </div>
                     </div>
-                    <div className="footerCell">
+                    {/* <div className="footerCell">
                         <div className='listCont'>
                             <h3>
                                 Trending Categories
@@ -169,7 +169,7 @@ function BlogsFooter() {
                                 )}
                             </ul>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="footerCell">
                         <div className="listCont">
                             <h3>Subscribe to our Newsletter</h3>

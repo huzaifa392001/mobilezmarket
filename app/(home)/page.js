@@ -14,11 +14,12 @@ import AppDownloadModal from "@/app-ui/AppDownloadModal/AppDownloadModal";
 import StyledButton from "@/app-ui/StyledButton/StyledButton";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import axios from "axios";
+import CategorySlider from "@/app-ui/CategorySlider/CategorySlider";
 
 export default function Home() {
     const [fullContent, setFullContent] = useState(false)
     const [modalVisible, setModalVisible] = useState(false);
-    const [deviceWidth, setDeviceWidth] = useState(null);
+    const [deviceWidth, setDeviceWidth] = useState(578);
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState({
         mobiles: [],
@@ -96,11 +97,27 @@ export default function Home() {
     return (
         <div className="home_wrap">
             <HomeBanner />
-            <h1 className="mainHeading">Top Mobilephone Marketplace in Pakistan</h1>
+            {!deviceWidth <= 575 &&<h1 className="mainHeading">Top Mobile Phone Marketplace in Pakistan</h1>}
             <main>
+                {deviceWidth <= 575 && (
+                    <>
+                        <section className="BrandSliderSec secPadding">
+                            <div className="content_wrap">
+                                <SectionHeading text="categories" />
+                                <CategorySlider />
+                            </div>
+                        </section>
+                        <section className="BrandSliderSec secPadding">
+                            <div className="content_wrap">
+                                <SectionHeading text="top brands" />
+                                <BrandSlider />
+                            </div>
+                        </section>
+                    </>
+                )}
                 <section className="SliderSec secPadding">
                     <div className="content_wrap">
-                        <SectionHeading text="recently added mobiles" />
+                        <SectionHeading btn btnLink="/devices/cat-mobile" text="recently added mobiles" />
                         <ProductSlider loading={loading} data={data.mobiles} sliderProp={sliderProp} />
                     </div>
                 </section>
@@ -109,14 +126,8 @@ export default function Home() {
                     <>
                         <section className="SliderSec secPadding">
                             <div className="content_wrap">
-                                <SectionHeading text="recently added tablets" />
+                                <SectionHeading btn btnLink="/devices/cat-tablet" text="recently added tablets" />
                                 <ProductSlider loading={loading} data={data.tablets} sliderProp={sliderProp} />
-                            </div>
-                        </section>
-                        <section className="BrandSliderSec secPadding">
-                            <div className="content_wrap">
-                                <SectionHeading text="top brands" />
-                                <BrandSlider />
                             </div>
                         </section>
                     </>
@@ -130,7 +141,7 @@ export default function Home() {
                         </section>
                         <section className="SliderSec secPadding">
                             <div className="content_wrap">
-                                <SectionHeading text="recently added tablets" />
+                                <SectionHeading btn btnLink="/devices/cat-tablet" text="recently added tablets" />
                                 <ProductSlider loading={loading} data={data.tablets} sliderProp={sliderProp} />
                             </div>
                         </section>
@@ -144,7 +155,7 @@ export default function Home() {
                 </section>
                 <section className="SliderSec secPadding">
                     <div className="content_wrap">
-                        <SectionHeading text="recently added smart watches" />
+                        <SectionHeading btn btnLink="/devices/cat-watch" text="recently added smart watches" />
                         <ProductSlider loading={loading} data={data.smartWatches} sliderProp={sliderProp} />
                     </div>
                 </section>
@@ -155,7 +166,7 @@ export default function Home() {
                 </section>
                 <section className="SliderSec secPadding">
                     <div className="content_wrap">
-                        <SectionHeading text="recently added accessories" />
+                        <SectionHeading btn btnLink="/devices/cat-accessories" text="recently added accessories" />
                         <ProductSlider loading={loading} data={data.accessories} sliderProp={sliderProp} />
                     </div>
                 </section>

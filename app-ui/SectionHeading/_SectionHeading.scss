@@ -1,5 +1,5 @@
 .secHeading {
-    margin: 0 0 25px !important;
+    margin: 0 !important;
     color: $dark;
     position: relative;
     display: inline-block;
@@ -25,6 +25,22 @@
     }
 }
 
+.linkBtnCont {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 25px !important;
+
+    .linkBtn {
+        color: $secondary;
+        font-weight: 500;
+        font-size: 1.125rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
 @media screen and (max-width: $breakpoint_lg) {
     .secHeading {
         font-size: $title_md;
@@ -35,4 +51,11 @@
     .secHeading {
         font-size: 20px;
     }
+
+    .linkBtnCont {
+        flex-direction: column;
+        gap: 10px;
+        margin: 0 0 15px !important;
+    }
+
 }

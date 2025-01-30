@@ -1,6 +1,6 @@
 "use client";
-import React, {useEffect, useState} from "react";
-import {Row, Form, Col, Input, Checkbox, Select, notification} from "antd";
+import React, { useEffect, useState } from "react";
+import { Row, Form, Col, Input, Checkbox, Select, notification } from "antd";
 import {
     emailRule,
     passwordRule,
@@ -9,8 +9,8 @@ import {
 } from "@/utils/rules";
 import StyledButton from "@/app-ui/StyledButton/StyledButton";
 import api from "@/services/api";
-import {useRouter} from "next/navigation";
-import {useAuthCheck} from "@/utils/hooks";
+import { useRouter } from "next/navigation";
+import { useAuthCheck } from "@/utils/hooks";
 import LoginWithGoogle from "@/app-ui/LoginWithGoogle/LoginWithGoogle";
 import Image from "next/image";
 import PlacesAutocomplete, {
@@ -19,12 +19,12 @@ import PlacesAutocomplete, {
     getLatLng,
 } from "react-places-autocomplete";
 
-import {MdOutlineMyLocation} from "react-icons/md";
+import { MdOutlineMyLocation } from "react-icons/md";
 import Link from "next/link";
 
 const Page = () => {
     const router = useRouter();
-    const {authCheck} = useAuthCheck();
+    const { authCheck } = useAuthCheck();
 
     const [form] = Form.useForm();
 
@@ -50,7 +50,7 @@ const Page = () => {
 
     const onSubmit = async (values) => {
         if (values?.password !== values?.conf_password) {
-            notification.error({message: "Password does not match!"});
+            notification.error({ message: "Password does not match!" });
             return;
         }
 
@@ -65,22 +65,22 @@ const Page = () => {
             setLoading(true);
             const res = await api.post("/register-user", payload);
             if (res?.data?.status === 400) {
-                notification.error({message: res?.data?.errors?.email?.[0]});
+                notification.error({ message: res?.data?.errors?.email?.[0] });
                 setLoading(false);
             }
 
             if (res?.data?.status === 200) {
-                notification.success({message: res?.data?.message});
+                notification.success({ message: res?.data?.message });
                 localStorage.setItem("@phone", values?.phone);
                 localStorage.setItem("@token", res?.data?.token);
                 setLoading(false);
                 router.push("/otp");
             } else if (res?.data?.status === 419) {
-                notification.error({message: res?.data?.message});
+                notification.error({ message: res?.data?.message });
                 setLoading(false);
-            }   
+            }
         } catch (error) {
-            notification.error({message: error?.response?.data?.message});
+            notification.error({ message: error?.response?.data?.message });
             setLoading(false);
         }
     };
@@ -136,7 +136,7 @@ const Page = () => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
-                    const {latitude, longitude} = position.coords;
+                    const { latitude, longitude } = position.coords;
                     try {
                         const results = await geocodeByAddress(`${latitude}, ${longitude}`);
                         if (results && results.length > 0) {
@@ -183,7 +183,7 @@ const Page = () => {
                                 <h2>Sign Up</h2>
                                 <p>
                                     <span className="welcome_text">Welcome back!</span> please
-                                    signup to your <br/> account.
+                                    signup to your <br /> account.
                                 </p>
                                 <div>
                                     <Form form={form} onFinish={onSubmit} layout="vertical">
@@ -196,7 +196,7 @@ const Page = () => {
                                                     rules={requiredRule}
                                                     label="First Name"
                                                 >
-                                                    <Input placeholder="First Name"/>
+                                                    <Input placeholder="First Name" />
                                                 </Form.Item>
                                             </Col>
                                             <Col lg={12} md={12} sm={24} xs={24}>
@@ -207,7 +207,7 @@ const Page = () => {
                                                     rules={requiredRule}
                                                     label="Last Name"
                                                 >
-                                                    <Input placeholder="Last Name"/>
+                                                    <Input placeholder="Last Name" />
                                                 </Form.Item>
                                             </Col>
                                         </Row>
@@ -231,11 +231,11 @@ const Page = () => {
                                                         }}
                                                     >
                                                         {({
-                                                              getInputProps,
-                                                              suggestions,
-                                                              getSuggestionItemProps,
-                                                              loading,
-                                                          }) => (
+                                                            getInputProps,
+                                                            suggestions,
+                                                            getSuggestionItemProps,
+                                                            loading,
+                                                        }) => (
                                                             <div>
                                                                 <Input
                                                                     onClick={onOpenPlacesDropdown}
@@ -251,7 +251,7 @@ const Page = () => {
                                                                             onClick={onGetCurrentLocation}
                                                                             type="button"
                                                                         >
-                                                                            <MdOutlineMyLocation/>
+                                                                            <MdOutlineMyLocation />
                                                                             Current location
                                                                         </button>
 
@@ -259,9 +259,8 @@ const Page = () => {
 
                                                                         {suggestions.map((suggestion, index) => (
                                                                             <div
-                                                                                className={`${
-                                                                                    suggestion.active ? "active" : ""
-                                                                                }`}
+                                                                                className={`${suggestion.active ? "active" : ""
+                                                                                    }`}
                                                                                 key={index}
                                                                                 {...getSuggestionItemProps(
                                                                                     suggestion,
@@ -285,7 +284,7 @@ const Page = () => {
                                                     rules={emailRule}
                                                     label="Email"
                                                 >
-                                                    <Input placeholder="Enter Email"/>
+                                                    <Input placeholder="Enter Email" />
                                                 </Form.Item>
                                             </Col>
                                         </Row>
@@ -297,31 +296,29 @@ const Page = () => {
                                                     rules={numberRule}
                                                     label="Contact number"
                                                 >
-                                                    <Input placeholder="Enter Phone Number"/>
+                                                    <Input placeholder="Enter Phone Number" />
                                                 </Form.Item>
                                             </Col>
                                         </Row>
                                         <Row gutter={[8, 8]}>
                                             <Col lg={12} md={12} sm={24} xs={24}>
                                                 <Form.Item
-                                                    layout="vertical"
-                                                    className="styled_input"
                                                     name="password"
                                                     rules={passwordRule}
                                                     label="Password"
+                                                    className="styled_input password_style"
                                                 >
-                                                    <Input placeholder="Password"/>
+                                                    <Input.Password placeholder="Password" />
                                                 </Form.Item>
                                             </Col>
                                             <Col lg={12} md={12} sm={24} xs={24}>
                                                 <Form.Item
-                                                    layout="vertical"
-                                                    className="styled_input"
                                                     name="conf_password"
                                                     rules={passwordRule}
                                                     label="Confirm Password"
+                                                    className="styled_input password_style"
                                                 >
-                                                    <Input placeholder="Confirm Password"/>
+                                                    <Input.Password placeholder="Confirm Password" />
                                                 </Form.Item>
                                             </Col>
                                         </Row>
@@ -332,7 +329,7 @@ const Page = () => {
                                                     name="code"
                                                     label="Referral Code (Optional)"
                                                 >
-                                                    <Input placeholder="Referral Code"/>
+                                                    <Input placeholder="Referral Code" />
                                                 </Form.Item>
                                             </Col>
                                             <Col lg={12} md={12} sm={24} xs={24}>
@@ -365,7 +362,7 @@ const Page = () => {
                                                         name="shop_name"
                                                         label="Shop Name"
                                                     >
-                                                        <Input placeholder="Shop Name"/>
+                                                        <Input placeholder="Shop Name" />
                                                     </Form.Item>
                                                 </Col>
                                                 <Col lg={12} md={12} sm={24} xs={24}>
@@ -375,7 +372,7 @@ const Page = () => {
                                                         label="Shop Address"
                                                         className="styled_input"
                                                     >
-                                                        <Input placeholder="Shop Address"/>
+                                                        <Input placeholder="Shop Address" />
                                                     </Form.Item>
                                                 </Col>
                                             </Row>
@@ -412,7 +409,7 @@ const Page = () => {
                                             <Row gutter={[16, 16]}>
                                                 <Col lg={24} md={24} sm={24} xs={24}>
                                                     <div className="flex_center">
-                                                        <LoginWithGoogle/>
+                                                        <LoginWithGoogle />
                                                     </div>
                                                 </Col>
                                             </Row>
